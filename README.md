@@ -1,7 +1,7 @@
 ### UK Food Standards Agency Database Analysis
 This repository contains code and instructions to analyze the food hygiene ratings data from the UK Food Standards Agency. The analysis aims to help the editors of Eat Safe, Love magazine identify establishments to focus on for future articles. The analysis includes setting up the database, updating the data, and performing exploratory analysis.
 
-##Prerequisites
+# Prerequisites
 Before running the analysis, ensure that you have the following software installed:
 
 *Python 3
