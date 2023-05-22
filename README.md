@@ -30,8 +30,7 @@ The top 5 establishments with a RatingValue of '5' sorted by lowest hygiene scor
 Counting the number of establishments in each Local Authority area that have a hygiene score of 0:
 There are 55 rows in the DataFrame with the count of establishments. The first 10 rows are as follows:
    
-   
-    | _id | count |
+      | _id | count |
     |-----|-------|
     |Thanet|1130|
     |Greenwich|882|
