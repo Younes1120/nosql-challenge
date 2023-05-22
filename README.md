@@ -4,10 +4,10 @@ This repository contains code and instructions to analyze the food hygiene ratin
 # Prerequisites
 Before running the analysis, ensure that you have the following software installed:
 
-*Python 3
-*Jupyter Notebook
-*MongoDB
-*PyMongo
+* Python 3
+* Jupyter Notebook
+* MongoDB
+* PyMongo
 
  ## Part 1: Database and Jupyter Notebook Set Up
 Start by importing the data provided in the establishments.json file into the MongoDB database.
