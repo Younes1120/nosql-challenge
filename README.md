@@ -1,46 +1,73 @@
-# Eat Safe, Love
-This repository contains scripts and data files for analyzing food establishments in the UK. The data is stored in a NoSQL database, and the analysis is performed using Python and Pandas.
+### UK Food Standards Agency Database Analysis
+This repository contains code and instructions to analyze the food hygiene ratings data from the UK Food Standards Agency. The analysis aims to help the editors of Eat Safe, Love magazine identify establishments to focus on for future articles. The analysis includes setting up the database, updating the data, and performing exploratory analysis.
 
-## Set Up Database
-* To set up the database, the NoSQL_setup.ipynb notebook provides instructions on importing the data and performing initial setup. The data from the establishments.json file is imported into the uk_food database and the establishments collection using the mongoimport command.
+##Prerequisites
+Before running the analysis, ensure that you have the following software installed:
 
-The notebook also includes instructions for updating the database. 
-    
-* Update the new restauarant with the correct BusineesTypeID. 
+*Python 3
+*Jupyter Notebook
+*MongoDB
+*PyMongo
 
-    
-* Drop all establishments that has Dover as their Local Authority from the database. 
+ ## Part 1: Database and Jupyter Notebook Set Up
+Start by importing the data provided in the establishments.json file into the MongoDB database.
 
-    
-* Convert latitude and longitude to decimal numbers.
+Open the terminal and navigate to the directory where the establishments.json file is located.
+Use the following command to import the data into the MongoDB database:
+css
+Copy code
+mongoimport --db uk_food --collection establishments --file establishments.json
+Note: Replace <path_to_file> with the actual file path.
+Open the Jupyter Notebook and import the necessary libraries: PyMongo and Pretty Print (pprint).
 
-    
-## Exploratory Analysis
-* The NoSQL_analysis.ipynb notebook focuses on performing exploratory analysis on the data using Pandas DataFrames. Here are some of the analyses conducted:
+Create an instance of the Mongo Client in your Jupyter Notebook.
 
-Identifying establishments with a hygiene score equal to 20:
-There are 41 establishments with a hygiene score of 20 in the uk_food dataset.
+Confirm that the database and data are loaded properly:
 
-Finding establishments in London with a RatingValue greater than or equal to 4:
-There are 34 establishments in London that have a RatingValue greater than or equal to 4.
+List the databases using the following code:
+python
+Copy code
+client.list_database_names()
+Confirm that uk_food is listed.
+List the collections in the uk_food database using the following code:
+python
+Copy code
+db.list_collection_names()
+Confirm that establishments is listed.
+Find and display one document in the establishments collection using find_one and display with pprint.
+Assign the establishments collection to a variable to prepare the collection for use.
+## Part 2: Update the Database
+Add a new restaurant, "Penang Flavours," to the database with the given information. The restaurant has not been rated yet.
 
-Listing the top 5 establishments with a RatingValue rating of '5', sorted by lowest hygiene score and nearest to the new restaurant added, "Penang Flavours":
-The top 5 establishments with a RatingValue of '5' sorted by lowest hygiene score and nearest to "Penang Flavours" are: "Volunteer", "Plumstead Manor Nursery", "Atlantic Fish Bar", "Iceland", and "Howe and Co Fish and Chips - Van 17".
+Use the insert_one method to add the document to the establishments collection.
+Find the BusinessTypeID for "Restaurant/Cafe/Canteen" and return only the BusinessTypeID and BusinessType fields.
 
-Counting the number of establishments in each Local Authority area that have a hygiene score of 0:
-There are 55 rows in the DataFrame with the count of establishments. The first 10 rows are as follows:
+Use the find_one method with a query for the given BusinessType.
+Update the new restaurant document with the BusinessTypeID found.
 
-   There are 55 rows in the DataFrame. This is the preview of the first 10 rows:
-    | _id | count |
-    |-----|-------|
-    |Thanet|1130|
-    |Greenwich|882|
-    |Maidstone|713|
-    |Newham|711|
-    |Swale|686|
-    |Chelmsford|680|
-    |Medway|672|
-    |Bexley|607|
-    |Southend-On-Sea|586|
-    |Tendring|542|
+Use the update_one method with a query for the new restaurant's name and an update to set the BusinessTypeID field.
+Check the number of documents that contain the Dover Local Authority.
+
+Use the count_documents method with a query for the Dover Local Authority.
+Remove any establishments within the Dover Local Authority from the database.
+
+Use the delete_many method with a query for the Dover Local Authority to remove the documents.
+Convert specific fields to their appropriate data types:
+
+Use the update_many method to convert latitude and longitude to decimal numbers.
+Use the update_many method to convert RatingValue to integer numbers.
+## Part 3: Exploratory Analysis
+Answer the following questions and present the results:
+
+Which establishments have a hygiene score equal to 20?
+Which establishments in London have a RatingValue greater than or equal to 4?
+What are the top 5 establishments with a RatingValue of 5, sorted by the lowest hygiene score, nearest to the new restaurant added, "Penang Flavours"?
+How many establishments in each Local Authority area have a hygiene score of 0? Sort the results from highest to lowest and print out the top ten local authority areas.
+For each question:
+
+Use count_documents to display the number of documents contained in the result.
+Display the first document in the results using pprint.
+Convert the result to a Pandas DataFrame, print the number of rows in the DataFrame, and display the first 10 rows.
+## Conclusion
+This analysis provides insights into the food hygiene ratings data from the UK Food Standards Agency. The results can be used by Eat Safe, Love magazine to focus their future articles on specific establishments. For more details, refer to the Jupyter Notebook file.
 
