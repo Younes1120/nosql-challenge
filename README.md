@@ -1,38 +1,19 @@
-## Eat Safe, Love
+# Eat Safe, Love
 This repository contains scripts and data files for analyzing food establishments in the UK. The data is stored in a NoSQL database, and the analysis is performed using Python and Pandas.
 
-## Set Up and Update Database
+## Set Up Database
 * To set up the database, the NoSQL_setup.ipynb notebook provides instructions on importing the data and performing initial setup. The data from the establishments.json file is imported into the uk_food database and the establishments collection using the mongoimport command.
 
-The notebook also includes instructions for updating the database. Here are some of the update operations:
-    ```
-    establishments.insert_one(new_restaurant) 
-    ```
+The notebook also includes instructions for updating the database. 
     
 * Update the new restauarant with the correct BusineesTypeID. 
-    ```
-    establishments.update_one(
-        new_restaurant, 
-        {'$set': 
-            {'BusinessTypeID': 1}
-        }
-    )
-    ```
+
     
 * Drop all establishments that has Dover as their Local Authority from the database. 
-    ```
-    establishments.delete_many({'LocalAuthorityName': 'Dover'})
-    ```
+
     
 * Convert latitude and longitude to decimal numbers.
-    ```
-    establishments.update_many({}, [{'$set': {'geocode.longitude': {'$toDouble': '$geocode.longitude'}, 
-                                               'geocode.latitude': {'$toDouble': '$geocode.latitude'}
-                                              }
-                                     }
-                                    ]
-                               )
-    ```
+
     
 ## Exploratory Analysis
 * The NoSQL_analysis.ipynb notebook focuses on performing exploratory analysis on the data using Pandas DataFrames. Here are some of the analyses conducted:
@@ -62,3 +43,4 @@ There are 55 rows in the DataFrame with the count of establishments. The first 1
     |Bexley|607|
     |Southend-On-Sea|586|
     |Tendring|542|
+
